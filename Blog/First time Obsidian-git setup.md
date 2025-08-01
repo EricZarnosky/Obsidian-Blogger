@@ -4,6 +4,7 @@ description: 'A step-by-step guide for setting up Obsidian Git for beginners, in
 publish: true
 created_date: 2024-01-20
 slug: git-setup-for-obsidian
+featured_image: /test1.webp
 tags:
   - obsidian
   - git

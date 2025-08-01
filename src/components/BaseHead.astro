@@ -4,6 +4,7 @@
 import '../styles/global.css';
 import { getUrl } from '../utils/url';
 import Fonts from './Fonts.astro';
+import { SITE_TITLE, RSS_TITLE, DEFAULT_FEATURED_IMAGE, DEFAULT_OG_TYPE, DEFAULT_TWITTER_CARD } from '../consts';
 
 interface Props {
 	title: string;
@@ -31,7 +32,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
 	title,
 	description,
-	featured_image = '/blog-placeholder-1.jpg',
+	featured_image = DEFAULT_FEATURED_IMAGE,
 	featured_image_alt,
 	meta_title,
 	meta_description,
@@ -39,11 +40,11 @@ const {
 	og_title,
 	og_description,
 	og_image,
-	og_type = 'article',
+	og_type = DEFAULT_OG_TYPE,
 	twitter_title,
 	twitter_description,
 	twitter_image,
-	twitter_card = 'summary_large_image',
+	twitter_card = DEFAULT_TWITTER_CARD,
 	keywords = [],
 	author,
 	no_index = false,
@@ -88,6 +89,9 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonical_url || canonicalURL} />
+
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" title={RSS_TITLE} href="/rss.xml" />
 
 <!-- Primary Meta Tags -->
 <title>{finalMetaTitle}</title>

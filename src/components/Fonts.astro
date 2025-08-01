@@ -1,30 +1,39 @@
 ---
 import { getUrl } from '../utils/url';
+import { FONT_CONFIGS, SELECTED_FONT_FAMILY } from '../consts';
+
+const selectedFont = FONT_CONFIGS[SELECTED_FONT_FAMILY];
 
 const fonts = {
-    regular: getUrl('/fonts/atkinson-regular.woff'),
-    bold: getUrl('/fonts/atkinson-bold.woff')
+    regular: getUrl(selectedFont.regular),
+    bold: getUrl(selectedFont.bold)
 };
 ---
 
-<!-- Font styles -->
-<style is:global>
+<style is:global set:html={`
     @font-face {
-        font-family: 'Atkinson';
-        src: url('{fonts.regular}') format('woff');
+        font-family: '${SELECTED_FONT_FAMILY}';
+        src: url('${fonts.regular}') format('woff');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
     }
+    
     @font-face {
-        font-family: 'Atkinson';
-        src: url('{fonts.bold}') format('woff');
+        font-family: '${SELECTED_FONT_FAMILY}';
+        src: url('${fonts.bold}') format('woff');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
     }
+    
+    :root {
+        --font-heading: '${SELECTED_FONT_FAMILY}', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+        --font-body: '${SELECTED_FONT_FAMILY}', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+`}>
 </style>
 
 <!-- Preload font files -->
 <link rel="preload" href={fonts.regular} as="font" type="font/woff" crossorigin />
-<link rel="preload" href={fonts.bold} as="font" type="font/woff" crossorigin /> 
+<link rel="preload" href={fonts.bold} as="font" type="font/woff" crossorigin />

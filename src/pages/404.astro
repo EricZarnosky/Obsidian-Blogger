@@ -2,10 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_404 } from '../consts';
 
 const title = `404 Not Found - ${SITE_TITLE}`;
-const description = "Oops! The page you're looking for has wandered off into the digital wilderness.";
+const description = SITE_404;
 ---
 
 <!doctype html>
@@ -15,13 +15,13 @@ const description = "Oops! The page you're looking for has wandered off into the
 	</head>
 	<body>
 		<Header />
-		<main>
-			<div class="error-container">
-				<div class="error-content">
+		<main class="page-container">
+			<div class="container-narrow">
+				<div class="card error-card">
 					<div class="error-badge">404 Error</div>
 					<h1>Page Not Found</h1>
 					<p class="error-message">
-						Oops! Looks like this page has wandered off into the digital wilderness.
+						{SITE_404}
 					</p>
 					<div class="error-illustration">
 						<svg class="lost-file" width="120" height="120" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ const description = "Oops! The page you're looking for has wandered off into the
 						</div>
 					</div>
 					<div class="action-buttons">
-						<a href="/" class="home-button">
+						<a href="/" class="btn btn-primary">
 							Take Me Home
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 								<path d="M5 12h14m-7-7 7 7-7 7"/>
@@ -51,26 +51,8 @@ const description = "Oops! The page you're looking for has wandered off into the
 </html>
 
 <style>
-	.error-container {
-		min-height: calc(100vh - 16rem);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 2rem;
-	}
-
-	.error-content {
+	.error-card {
 		text-align: center;
-		max-width: 600px;
-		margin: 0 auto;
-		padding: 3rem 2rem;
-		background: linear-gradient(
-			180deg,
-			rgba(var(--gray-light), 0.5) 0%,
-			rgba(var(--gray-light), 0.2) 100%
-		);
-		border-radius: 1.5rem;
-		box-shadow: var(--box-shadow);
 		position: relative;
 		overflow: hidden;
 	}
@@ -161,32 +143,6 @@ const description = "Oops! The page you're looking for has wandered off into the
 		margin-bottom: 1.5rem;
 	}
 
-	.home-button {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.875rem 1.5rem;
-		background-color: var(--accent);
-		color: white;
-		border-radius: 0.75rem;
-		text-decoration: none;
-		font-weight: 600;
-		transition: all 0.2s ease;
-	}
-
-	.home-button:hover {
-		background-color: var(--accent-dark);
-		transform: translateY(-2px);
-	}
-
-	.home-button svg {
-		transition: transform 0.2s ease;
-	}
-
-	.home-button:hover svg {
-		transform: translateX(4px);
-	}
-
 	.help-text {
 		font-size: 0.875rem;
 		color: rgb(var(--gray));
@@ -224,10 +180,6 @@ const description = "Oops! The page you're looking for has wandered off into the
 	}
 
 	@media (max-width: 768px) {
-		.error-content {
-			padding: 2rem 1.5rem;
-		}
-
 		h1 {
 			font-size: 2rem;
 		}
@@ -250,4 +202,4 @@ const description = "Oops! The page you're looking for has wandered off into the
 			font-size: 0.8125rem;
 		}
 	}
-</style> 
+</style>

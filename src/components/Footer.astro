@@ -1,24 +1,48 @@
 ---
+import { SOCIAL_TWITTER, SOCIAL_YOUTUBE, SOCIAL_LINKEDIN, SITE_OWNER } from "../consts";
+
 const today = new Date();
 ---
 
 <footer>
 	<div class="footer-content">
 		<div class="social-links">
-			<a href="https://twitter.com/joshipax" target="_blank" class="social-link" aria-label="Twitter">
+			{SOCIAL_TWITTER && (
+				<a href={`https://twitter.com/${SOCIAL_TWITTER}`} target="_blank" class="social-link" aria-label="Twitter">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+					</svg>
+				</a>
+			)}
+
+			{SOCIAL_YOUTUBE && (
+				<a href={`https://youtube.com/@${SOCIAL_YOUTUBE}`} target="_blank" class="social-link" aria-label="YouTube">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+					</svg>
+				</a>
+			)}
+
+            {SOCIAL_LINKEDIN && (
+				<a href={`https://linkedin.com/in/${SOCIAL_LINKEDIN}`} target="_blank" class="social-link" aria-label="LinkedIn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5 1.11-2.5 2.48-2.5 2.48 1.119 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-8.4c0-6.733-6.029-6.504-6.029-10.915v2.315z"/>
+					</svg>
+				</a>
+			)}
+
+			<a href="/rss.xml" class="social-link" aria-label="RSS Feed">
 				<svg viewBox="0 0 24 24" aria-hidden="true">
-					<path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-				</svg>
-			</a>
-			<a href="https://youtube.com/@beingpax" target="_blank" class="social-link" aria-label="YouTube">
-				<svg viewBox="0 0 24 24" aria-hidden="true">
-					<path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+					<path fill="currentColor" d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zM1.677 6.155v4.301c5.493 0 9.96 4.467 9.96 9.96h4.301c0-7.859-6.402-14.261-14.261-14.261zM1.677 0v4.301c9.493 0 17.239 7.746 17.239 17.239H24c0-12.094-9.906-22-22-22z"/>
 				</svg>
 			</a>
 		</div>
 		<div class="copyright">
-			&copy; {today.getFullYear()} Obsidian Blogger. All rights reserved.
+			&copy; {today.getFullYear()} {SITE_OWNER}. All rights reserved.
 		</div>
+        <div class="fork-attribution">
+            Forked from <a href="https://github.com/Beingpax/Obsidian-Blogger" target="_blank">Beingpax/Obsidian-Blogger</a>
+        </div>
 	</div>
 </footer>
 
@@ -31,7 +55,7 @@ const today = new Date();
 	}
 
 	.footer-content {
-		max-width: 920px;
+		max-width: 1020px;
 		margin: 0 auto;
 		text-align: center;
 	}
@@ -69,7 +93,23 @@ const today = new Date();
 	.copyright {
 		font-size: 0.9rem;
 		color: rgb(var(--gray));
+		margin-bottom: 0.5rem; /* Add some space below copyright */
 	}
+
+    .fork-attribution {
+        font-size: 0.8rem;
+        color: rgb(var(--gray-dark));
+        margin-top: 0.5rem;
+    }
+
+    .fork-attribution a {
+        color: rgb(var(--gray-dark));
+        text-decoration: underline;
+    }
+
+    .fork-attribution a:hover {
+        color: var(--accent);
+    }
 
 	@media (max-width: 720px) {
 		footer {

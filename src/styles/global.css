@@ -70,7 +70,7 @@ body {
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
 	font-size: 1.0625rem;
-	line-height: 1.7;
+	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-weight: 400;
@@ -143,7 +143,7 @@ a:hover {
 p {
 	margin-bottom: 1.25em;
 	font-size: 1.0625rem;
-	line-height: 1.75;
+	line-height: 1.6;
 	font-weight: 400;
 }
 
@@ -206,7 +206,7 @@ pre {
 pre > code {
 	all: unset;
 	font-family: var(--font-mono);
-	font-size: 0.875em;
+	font-size: 0.9em;
 }
 
 blockquote {
@@ -234,8 +234,8 @@ ul, ol {
 }
 
 li {
-	margin: 0.5rem 0;
-	line-height: 1.7;
+	margin: 0.2rem 0;
+	line-height: 1.5;
 }
 
 @media (max-width: 720px) {
@@ -311,7 +311,7 @@ li {
 
 .prose p {
 	margin-bottom: 1.5em;
-	line-height: 1.75;
+	line-height: 1.6;
 }
 
 /* Enhanced List Styling */
@@ -330,7 +330,7 @@ li {
 }
 
 .prose li {
-	margin: 0.5em 0;
+	margin: 0.2em 0;
 	padding-left: 0.5em;
 }
 
@@ -496,4 +496,200 @@ li {
 	max-width: 10rem;
 	margin-bottom: 1em;
 	border-top: 1px solid rgba(var(--gray), 0.2);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Container utilities */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.container-wide {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.container-narrow {
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+/* Grid utilities */
+.posts-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 2rem;
+}
+
+.contact-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+
+/* Button utilities */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.875rem 1.5rem;
+	border-radius: 0.75rem;
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.2s ease;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+}
+
+.btn-primary {
+	background-color: var(--accent);
+	color: white;
+}
+
+.btn-primary:hover {
+	background-color: var(--accent-dark);
+	transform: translateY(-2px);
+	text-decoration: none;
+}
+
+.btn-secondary {
+	border: 2px solid rgba(var(--gray), 0.2);
+	color: rgb(var(--gray-dark));
+	background: rgba(var(--gray-light), 0.3);
+}
+
+.btn-secondary:hover {
+	border-color: rgba(var(--gray), 0.3);
+	background: rgba(var(--gray-light), 0.5);
+	transform: translateY(-2px);
+	text-decoration: none;
+}
+
+.btn svg {
+	transition: transform 0.2s ease;
+}
+
+.btn:hover svg {
+	transform: translateX(4px);
+}
+
+/* Card utilities */
+.card {
+	background: linear-gradient(
+		180deg,
+		rgba(var(--gray-light), 0.5) 0%,
+		rgba(var(--gray-light), 0.2) 100%
+	);
+	border-radius: 1rem;
+	padding: 2rem;
+	border: 1px solid rgba(var(--gray), 0.1);
+	transition: all 0.3s ease;
+}
+
+.card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--box-shadow);
+}
+
+.card-centered {
+	text-align: center;
+}
+
+/* Page layout utilities */
+.page-container {
+	min-height: calc(100vh - 16rem);
+	padding: 4rem 2rem;
+}
+
+.page-header {
+	text-align: center;
+	margin-bottom: 4rem;
+	padding: 4rem 1rem;
+	background: linear-gradient(
+		180deg,
+		rgba(var(--accent), 0.08) 0%,
+		rgba(var(--accent), 0.02) 100%
+	);
+	border-radius: 1.5rem;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 800;
+	color: rgb(var(--black));
+	margin-bottom: 1rem;
+	line-height: 1.2;
+	font-family: var(--font-heading);
+}
+
+.page-description {
+	font-size: 1.125rem;
+	color: rgb(var(--gray));
+	max-width: 600px;
+	line-height: 1.6;
+	margin: 0 auto;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+	.container-wide {
+		padding: 0 1rem;
+	}
+
+	.posts-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.contact-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.page-container {
+		padding: 2rem 1rem;
+	}
+
+	.page-header {
+		padding: 3rem 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.page-title {
+		font-size: 2rem;
+	}
+
+	.page-description {
+		font-size: 1rem;
+	}
+
+	.card {
+		padding: 1.5rem;
+	}
+}
+
+.no-posts {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: rgb(var(--gray));
+    font-size: 1.25rem;
+    flex: 1;
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 1024px) {
+  .prose {
+    max-width: 80ch;
+  }
 }

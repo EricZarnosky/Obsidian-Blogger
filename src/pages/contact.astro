@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_CONTACT, CONTACT_INTRO, CONTACT_TIP, CONTACT_RESPONSE_TIME, SOCIAL_TWITTER, SOCIAL_GITHUB, SOCIAL_LINKEDIN } from '../consts';
 
 const title = `Contact - ${SITE_TITLE}`;
 const description = "Get in touch with us for any questions or concerns.";
@@ -15,10 +15,75 @@ const description = "Get in touch with us for any questions or concerns.";
 	</head>
 	<body>
 		<Header />
-		<main>
-			<div class="contact-container">
-				<div class="contact-content">
-					<h1>Contact</h1>
+		<main class="container page-container">
+			<div class="page-header">
+				<h1 class="page-title">Contact</h1>
+				<p class="page-description">
+					{CONTACT_INTRO}
+				</p>
+			</div>
+
+			<div class="contact-grid">
+				<div class="card card-centered">
+					<div class="contact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+							<polyline points="22,6 12,13 2,6"/>
+						</svg>
+					</div>
+					<h3>Email</h3>
+					<p>Send us an email for general inquiries, support, or collaboration opportunities.</p>
+					<a href={`mailto:${SITE_CONTACT}`} class="contact-link">{SITE_CONTACT}</a>
+				</div>
+
+				<div class="card card-centered">
+					<div class="contact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+						</svg>
+					</div>
+					<h3>Twitter</h3>
+					<p>Follow us for updates, tips, and quick responses to your questions.</p>
+					<a href={`https://twitter.com/${SOCIAL_TWITTER}`} target="_blank" class="contact-link">@{SOCIAL_TWITTER}</a>
+				</div>
+
+				<div class="card card-centered">
+					<div class="contact-icon">
+						<svg viewBox="0 0 16 16" width="24" height="24" fill="currentColor">
+							<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+						</svg>
+					</div>
+					<h3>GitHub</h3>
+					<p>Found a bug or have a feature request? Open an issue on our GitHub repository.</p>
+					<a href={`https://github.com/${SOCIAL_GITHUB}`} target="_blank" class="contact-link">GitHub Repository</a>
+				</div>
+
+				<div class="card card-centered">
+					<div class="contact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5 1.11-2.5 2.48-2.5 2.48 1.119 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-8.4c0-6.733-6.029-6.504-6.029-10.915v2.315z"/>
+						</svg>
+					</div>
+					<h3>LinkedIn</h3>
+					<p>Connect with us professionally and stay updated on our latest developments.</p>
+					<a href={`https://linkedin.com/in/${SOCIAL_LINKEDIN}`} target="_blank" class="contact-link">LinkedIn Profile</a>
+				</div>
+			</div>
+
+			<div class="contact-footer">
+				<div class="response-info card">
+					<h3>Response Times</h3>
+					<ul>
+						<li><strong>Email:</strong> {CONTACT_RESPONSE_TIME.email}</li>
+						<li><strong>Twitter:</strong> {CONTACT_RESPONSE_TIME.twitter}</li>
+						<li><strong>GitHub Issues:</strong> {CONTACT_RESPONSE_TIME.github}</li>
+					</ul>
+				</div>
+				
+				<div class="card contact-note">
+					<p>
+						<strong>Quick tip:</strong> {CONTACT_TIP}
+					</p>
 				</div>
 			</div>
 		</main>
@@ -27,32 +92,99 @@ const description = "Get in touch with us for any questions or concerns.";
 </html>
 
 <style>
-	.contact-container {
-		min-height: calc(100vh - 16rem);
-		padding: 4rem 2rem;
+	.contact-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 3rem;
+		height: 3rem;
+		background: rgba(var(--accent), 0.1);
+		border-radius: 0.75rem;
+		color: var(--accent);
+		margin: 0 auto 1rem;
 	}
 
-	.contact-content {
-		max-width: 720px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.5rem;
-		margin-bottom: 2rem;
+	.card h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
 		color: rgb(var(--black));
+		margin-bottom: 0.5rem;
 		font-family: var(--font-heading);
-		font-weight: 700;
-		letter-spacing: -0.02em;
+	}
+
+	.card p {
+		color: rgb(var(--gray));
+		margin-bottom: 1rem;
+		line-height: 1.5;
+	}
+
+	.contact-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 500;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		transition: all 0.2s ease;
+		border: 1px solid transparent;
+	}
+
+	.contact-link:hover {
+		background: rgba(var(--accent), 0.1);
+		border-color: rgba(var(--accent), 0.2);
+		transform: translateY(-1px);
+	}
+
+	.contact-footer {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(var(--gray), 0.1);
+	}
+
+	.response-info h3 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: rgb(var(--black));
+		margin-bottom: 1rem;
+		font-family: var(--font-heading);
+	}
+
+	.response-info ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.response-info li {
+		padding: 0.5rem 0;
+		color: rgb(var(--gray));
+		border-bottom: 1px solid rgba(var(--gray), 0.1);
+	}
+
+	.response-info li:last-child {
+		border-bottom: none;
+	}
+
+	.contact-note {
+		background: rgba(var(--accent), 0.05);
+		border: 1px solid rgba(var(--accent), 0.1);
+	}
+
+	.contact-note p {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+		line-height: 1.6;
 	}
 
 	@media (max-width: 768px) {
-		.contact-container {
-			padding: 2rem 1rem;
-		}
-
-		h1 {
-			font-size: 2rem;
+		.contact-footer {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
 		}
 	}
-</style> 
+</style>

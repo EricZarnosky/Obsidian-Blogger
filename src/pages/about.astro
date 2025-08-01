@@ -1,11 +1,16 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+import { ABOUT_AUTHOR, ABOUT_TAGS } from '../consts';
+
+const aboutCreationDate = new Date('2023-10-26'); // Placeholder date
 ---
 
 <Layout
 	title="About Obsidian Blogger"
 	description="Transform your Obsidian notes into a beautiful blog with ease"
-	created_date={new Date()}
+	created_date={aboutCreationDate}
+	author={ABOUT_AUTHOR}
+	
 >
 	<p>
 		Welcome to Obsidian Blogger, a powerful tool that bridges the gap between your personal knowledge management in Obsidian and public content sharing. This platform allows you to seamlessly transform your Obsidian notes into a beautiful, modern blog while maintaining your existing workflow.
@@ -16,7 +21,7 @@ import Layout from '../layouts/BlogPost.astro';
 	<h3>🔄 Seamless Integration with Obsidian</h3>
 	<p>
 		Write and organize your content in Obsidian just as you always have. Your existing notes, complete with links, tags, and metadata, are automatically transformed into blog posts while preserving their structure and relationships.
-	</p>
+		</p>
 
 	<h3>⚡ Lightning Fast Performance</h3>
 	<p>
@@ -38,18 +43,43 @@ import Layout from '../layouts/BlogPost.astro';
 		Continue writing in Markdown, the format you're already familiar with. All your formatting, code blocks, and even Obsidian-specific features are preserved and beautifully rendered on your blog.
 	</p>
 
-	<h3>🔒 You Own Your Content</h3>
-	<p>
+	<h3>🔒 You Own Your Content</h3>	<p>
 		Unlike traditional blogging platforms, you maintain complete control over your content. Your posts live in your Obsidian vault as regular markdown files, giving you true ownership and portability.
 	</p>
 
 	<h2>Getting Started</h2>
 	<p>
 		Starting your blog is as simple as selecting which notes you want to publish. The platform handles the rest, from generating your site to deploying it online. Whether you're a developer, writer, or knowledge worker, Obsidian Blogger provides the perfect platform for sharing your insights with the world.
-	</p>
+		</p>
 
 	<h2>Join the Community</h2>
 	<p>
 		Join a growing community of writers and thinkers who are using Obsidian Blogger to share their knowledge. We're constantly improving and adding new features based on community feedback.
 	</p>
+
+	{/* Display ABOUT_TAGS as simple badges */} 
+	<div class="about-tags">
+		{ABOUT_TAGS.map((tag) => (
+			<span class="about-tag-badge">{tag}</span>
+		))}
+	</div>
 </Layout>
+
+<style>
+	.about-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		margin-top: 1.5em;
+		justify-content: center;
+	}
+
+	.about-tag-badge {
+		background-color: rgba(var(--gray-light), 0.5);
+		color: rgb(var(--gray-dark));
+		padding: 0.3em 0.9em;
+		border-radius: 1em;
+		font-size: 0.9em;
+		font-weight: 500;
+	}
+</style>

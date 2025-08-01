@@ -7,13 +7,18 @@ interface Props {
     description?: string;
     date?: Date;
     slug: string;
+    featured_image?: string;
 }
 
-const { title, description, date, slug } = Astro.props;
+const { title, description, date, slug, featured_image } = Astro.props;
 ---
 
-<article class="blog-card">
+<article class="blog-card" data-has-image={featured_image ? 'true' : 'false'}>
     <a href={getUrl(`/${slug}/`)} class="card-link">
+        {featured_image && (
+            <div class="card-image" style={{backgroundImage: `url(${featured_image})`}}></div>
+        )}
+        <div class="card-overlay"></div>
         <div class="card-content">
             <div class="main-content">
                 <h2 class="title">{title}</h2>
@@ -47,11 +52,73 @@ const { title, description, date, slug } = Astro.props;
             0 2px 4px -1px rgba(0, 0, 0, 0.03);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
+        min-height: 280px;
+    }
+
+    .blog-card[data-has-image="true"] {
+        background: transparent;
+    }
+
+    .card-image {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: local;
+        z-index: 0;
+        opacity: 0.3;
+        filter: brightness(0.5) contrast(0.8);
+        transition: all 0.3s ease;
+        width: 100%;
+        height: 100%;
+    }
+
+    .blog-card:hover .card-image {
+        opacity: 0.6;
+        filter: brightness(0.7) contrast(0.9);
+        transform: scale(1.02);
+    }
+
+    .card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .blog-card[data-has-image="true"] .card-overlay {
+        opacity: 1;
+    }
+
+    .blog-card:hover .card-overlay {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.1) 50%,
+            rgba(0, 0, 0, 0.5) 100%
+        );
     }
 
     @media (prefers-color-scheme: dark) {
-        .blog-card {
+        .blog-card:not([data-has-image="true"]) {
             background: rgb(var(--card-bg));
+        }
+        
+        .blog-card[data-has-image="true"] .card-overlay {
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.6) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
         }
     }
 
@@ -66,6 +133,11 @@ const { title, description, date, slug } = Astro.props;
         );
         opacity: 0;
         transition: opacity 0.3s ease;
+        z-index: 2;
+    }
+
+    .blog-card:not([data-has-image="true"])::after {
+        opacity: 0;
     }
 
     .blog-card:hover {
@@ -87,12 +159,13 @@ const { title, description, date, slug } = Astro.props;
 
     .card-content {
         position: relative;
-        z-index: 1;
-        padding: 1rem;
+        z-index: 3;
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
         height: 100%;
+        min-height: 280px;
     }
 
     .main-content {
@@ -111,8 +184,18 @@ const { title, description, date, slug } = Astro.props;
         transition: color 0.2s ease;
     }
 
+    .blog-card[data-has-image="true"] .title {
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
     .blog-card:hover .title {
         color: rgb(var(--accent));
+    }
+
+    .blog-card[data-has-image="true"]:hover .title {
+        color: rgb(var(--accent));
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
     }
 
     .description {
@@ -124,6 +207,11 @@ const { title, description, date, slug } = Astro.props;
         overflow: hidden;
     }
 
+    .blog-card[data-has-image="true"] .description {
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
     .footer {
         display: flex;
         justify-content: space-between;
@@ -133,9 +221,18 @@ const { title, description, date, slug } = Astro.props;
         border-top: 1px solid rgba(var(--black), 0.06);
     }
 
+    .blog-card[data-has-image="true"] .footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
     .date {
         font-size: 0.875rem;
         color: rgb(var(--gray));
+    }
+
+    .blog-card[data-has-image="true"] .date {
+        color: rgba(255, 255, 255, 0.8);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     .read-more {
@@ -146,6 +243,15 @@ const { title, description, date, slug } = Astro.props;
         font-weight: 500;
         color: rgb(var(--accent));
         transition: gap 0.3s ease;
+    }
+
+    .blog-card[data-has-image="true"] .read-more {
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .blog-card[data-has-image="true"]:hover .read-more {
+        color: rgb(var(--accent));
     }
 
     .read-more svg {
@@ -163,11 +269,13 @@ const { title, description, date, slug } = Astro.props;
     @media (max-width: 768px) {
         .blog-card {
             border-radius: 16px;
+            min-height: 240px;
         }
 
         .card-content {
             padding: 1.25rem;
             gap: 1rem;
+            min-height: 240px;
         }
 
         .title {
@@ -178,4 +286,4 @@ const { title, description, date, slug } = Astro.props;
             padding-top: 0.875rem;
         }
     }
-</style> 
+</style>
